@@ -11,11 +11,17 @@ class User(AbstractUser):
   location = models.CharField(max_length=30, blank=True, null=True)
   birth_date = models.DateField(blank=True, null=True)
 
+  def __str__(self):
+    return self.username
+
 
 class Artist(models.Model):
   name = models.CharField(max_length=200)
   members = models.CharField(max_length=200)
   date_formed = models.DateField(blank=True, null=True)
+
+  def __str__(self):
+    return self.name
 
 
 class Album(models.Model):
@@ -31,3 +37,6 @@ class Album(models.Model):
   release_date = models.DateField(blank=True, null=True)
   genre = models.CharField(max_length=2, choices=GENRE_CHOICES)
   album_art = models.ImageField(blank=True, null=True)
+
+  def __str__(self):
+    return f'{self.title} by {self.artist}'
