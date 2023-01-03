@@ -126,3 +126,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'music.User'
 # change this setting at the very beginning. It is hard to reverse once you have run the first migrations because Django will have already created its default user table in the db
+
+# Django Registration Redux
+LOGIN_REDIRECT_URL = '/'
+# set this to send the  user to homepage after login, instead of the default /profile./

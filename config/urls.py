@@ -15,8 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from music import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
+    # this gives us all the registration urls
+    # we are particularly interested in 'accounts/login' and 'accounts/logout'
+    path('', views.index, name='home')
+    # arguments, in order:
+    # url pattern that user visits
+    # view that's called
+    # context(optional, if you are passing data from the db)
+    # name argument(a nickname/shortcut used to refer to this path in other places in the project)
 ]
