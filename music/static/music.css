@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: lightgrey;
+}
+
+#page-title {
+  width: 90%;
+  padding: 3% 3% 2% 3%;
+  align-self: center;
+}
