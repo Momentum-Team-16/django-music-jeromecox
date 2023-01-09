@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+<!-- whatever -->
+{% block content %}
+<h2>New album</h2>
+<form method="POST" class="album-form">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit" class="save btn btn-secondary">Save</button>
+</form>
+{% endblock %}

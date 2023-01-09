@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+<!-- whatever -->
+{% block content %}
+<div class="album">
+  <h2>
+    {{ album }}
+    <aside class="actions">
+      <a href="{% url 'album_edit' pk=album.pk %}" class="btn btn-secondary">
+        {% include './icons/pencil-fill.svg' %}
+      </a>
+      <a
+        href="{% url 'album_delete' pk=album.pk %}"
+        class="btn btn-outline-danger"
+        >X</a
+      >
+    </aside>
+  </h2>
+  <p>Release date: {{ album.release_date }}</p>
+  <p>Genre: {{ album.get_genre_display }}</p>
+  <p>Track list</p>
+  {% for song in album.songs.all %}
+  <!-- whatever -->
+  <p>"{{ song.title }}"</p>
+  <!-- whatever -->
+  {% endfor %}
+</div>
+{% endblock %}

@@ -3,16 +3,27 @@
 {% block content %}
 <!-- This line ^ overwrites what's in this block on base.html -->
 <h2>This is my homepage. This is index.html</h2>
+<p>
+  <a href="{% url 'album_new' %}" class="btn btn-outline-secondary">
+    Add an album {% include './icons/file-earmark-plus.svg' %}
+  </a>
+</p>
 {% for album in albums.all %}
-<article>
-  {{album}}
-  <p>The songs in this album are:</p>
+<div>
+  <h2><a href="{% url 'album_detail' pk=album.pk %}">{{ album }}</a></h2>
+  <a href="{% url 'album_edit' pk=album.pk %}" class="btn btn-outline-secondary"
+    >{% include './icons/pencil-fill.svg' %}</a
+  >
+  <a href="{% url 'album_delete' pk=album.pk %}" class="btn btn-outline-danger"
+    >X</a
+  >
+  <p>Track list:</p>
   {% for song in album.songs.all %}
   <!-- whatever -->
-  {{song}}
+  "{{ song.title }}"
   <!-- whatever -->
   {% endfor %}
-</article>
+</div>
 {% endfor %}
 <!-- whatever -->
 {% endblock %}
