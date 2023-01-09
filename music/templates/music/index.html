@@ -25,5 +25,9 @@
   {% endfor %}
 </div>
 {% endfor %}
-<!-- whatever -->
+<h3>Add a new album:</h3>
+<form class="album-form" id="create-form">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit" class="save btn btn-secondary">Save</button>
+</form>
 {% endblock %}

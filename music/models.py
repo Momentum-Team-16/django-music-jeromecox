@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from datetime import date
 
 # Create your models here.
@@ -42,7 +42,7 @@ class Album(models.Model):
     release_date = models.DateField(blank=True, null=True)
     genre = models.CharField(max_length=2, choices=GENRE_CHOICES, null=True, blank=True)
     album_art = models.ImageField(blank=True, null=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, default=2)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         artists = self.artist_from_songs

@@ -14,7 +14,7 @@ class AlbumForm(forms.ModelForm):
         fields = ('title', 'release_date', 'genre')
 
 
-# class SongForm(forms.ModelForm):
-#     class Meta:
-#         model = Song
-#         fields = ('title', 'artist', 'album')
+class SongForm(forms.ModelForm):
+    class Meta:
+        model = Song
+        fields = ('title', 'artist', 'album')

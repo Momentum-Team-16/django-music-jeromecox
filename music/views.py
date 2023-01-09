@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Album, Artist, Song
 from .forms import AlbumForm
@@ -11,7 +12,11 @@ from django.contrib import messages
 
 def index(request):
     albums = Album.objects.all()
-    context = {'albums': albums}
+    form = AlbumForm()
+    context = {
+        'form': form,
+        'albums': albums,
+    }
     # context is data from the database
     return render(request, 'music/index.html', context)
 
@@ -25,13 +30,15 @@ def create_album(request):
     if request.method == 'POST':
         form = AlbumForm(request.POST)
         if form.is_valid():
-            album = form.save()
+            album = form.save(commit=False)
+            album.owner = request.user
             album.save()
             messages.success(request, 'Album has been added to your collection')
             return redirect('album_detail', pk=album.pk)
-    else:
-        form = AlbumForm()
-        return render(request, 'music/edit_album.html', {'form': form})
+    data = {
+        'created': 'yes'
+    }
+    return JsonResponse(data)
 
 
 def album_edit(request, pk):
