@@ -4,7 +4,7 @@ from .models import Album, Artist, Song
 from .forms import AlbumForm
 from django.contrib import messages
 # from .consume import data_album
-# import json
+import json
 
 # Create your views here.
 # This is where actions happen. They are triggered by the user (or an AJAX request with JS)visiting a url.
@@ -26,9 +26,14 @@ def album_detail(request, pk):
     return render(request, 'music/album_detail.html', {'album': album})
 
 
+def ajax_post_view(request):
+    data_from_post = json.load(request)['post_data']
+
+
 def create_album(request):
     if request.method == 'POST':
         form = AlbumForm(request.POST)
+        breakpoint()
         if form.is_valid():
             album = form.save(commit=False)
             album.owner = request.user

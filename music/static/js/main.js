@@ -20,7 +20,7 @@ const form = document.querySelector('#create-form');
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   console.log('submitted');
-  fetch('album/new/', {
+  fetch('album/new', {
     method: 'POST',
     credentials: 'same-origin',
     headers: {

@@ -28,8 +28,8 @@ urlpatterns = [
     # view that's called
     # context(optional, if you are passing data from the db)
     # name argument(a nickname/shortcut used to refer to this path in other places in the project)
-    path('album/<int:pk>/', views.album_detail, name='album_detail'),
-    path('album/new/', views.create_album, name='album_new'),
+    path('album/<int:pk>', views.album_detail, name='album_detail'),
+    path('album/new', views.create_album, name='album_new'),
     path('album/<int:pk>/edit', views.album_edit, name='album_edit'),
     path('album/<int:pk>/delete', views.album_delete, name='album_delete'),
 ]

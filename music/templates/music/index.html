@@ -2,32 +2,44 @@
 <!-- hey Prettier, keep 1 and 3 separate -->
 {% block content %}
 <!-- This line ^ overwrites what's in this block on base.html -->
-<h2>This is my homepage. This is index.html</h2>
+<h2 class="has-text-centered">This is my homepage. This is index.html</h2>
 <p>
-  <a href="{% url 'album_new' %}" class="btn btn-outline-secondary">
+  <a href="{% url 'album_new' %}" class="button is-info is-light">
     Add an album {% include './icons/file-earmark-plus.svg' %}
   </a>
 </p>
-{% for album in albums.all %}
-<div>
-  <h2><a href="{% url 'album_detail' pk=album.pk %}">{{ album }}</a></h2>
-  <a href="{% url 'album_edit' pk=album.pk %}" class="btn btn-outline-secondary"
-    >{% include './icons/pencil-fill.svg' %}</a
-  >
-  <a href="{% url 'album_delete' pk=album.pk %}" class="btn btn-outline-danger"
-    >X</a
-  >
-  <p>Track list:</p>
-  {% for song in album.songs.all %}
-  <!-- whatever -->
-  "{{ song.title }}"
-  <!-- whatever -->
-  {% endfor %}
+<div class="columns">
+  {% for album in albums.all %}
+  <div class="card column m-3 is-half-tablet is-one-third-desktop">
+    <div class="card-image"></div>
+    <h2>
+      <a href="{% url 'album_detail' pk=album.pk %}">{{ album }}</a>
+      <a href="{% url 'album_edit' pk=album.pk %}" class="button is-dark"
+        >{% include './icons/pencil-fill.svg' %}</a
+      >
+      <a href="{% url 'album_delete' pk=album.pk %}" class="button is-danger"
+        >X</a
+      >
+    </h2>
+    <p>Track list:</p>
+    {% for song in album.songs.all %}
+    <!-- whatever -->
+    "{{ song.title }}"
+    <!-- whatever -->
+    {% endfor %}
+  </div>
 </div>
 {% endfor %}
-<h3>Add a new album:</h3>
-<form class="album-form" id="create-form">
+<form class="album-form box" id="create-form">
+  <h3>Add a new album:</h3>
   {% csrf_token %} {{ form.as_p }}
-  <button type="submit" class="save btn btn-secondary">Save</button>
+  <button type="submit" class="button is-info is-hovered">Save</button>
 </form>
 {% endblock %}
+
+<!-- <button class="button is-danger is-outlined">
+  <span>Delete</span>
+  <span class="icon is-small">
+    <i class="fas fa-times"></i>
+  </span>
+</button> -->
