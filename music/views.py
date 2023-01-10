@@ -26,23 +26,29 @@ def album_detail(request, pk):
     return render(request, 'music/album_detail.html', {'album': album})
 
 
-def ajax_post_view(request):
-    data_from_post = json.load(request)['post_data']
+# def ajax_post_view(request):
+#     data_from_post = json.load(request)['post_data']
 
 
 def create_album(request):
     if request.method == 'POST':
         form = AlbumForm(request.POST)
-        breakpoint()
         if form.is_valid():
             album = form.save(commit=False)
             album.owner = request.user
             album.save()
             messages.success(request, 'Album has been added to your collection')
-            return redirect('album_detail', pk=album.pk)
-    data = {
-        'created': 'yes'
-    }
+            # return redirect('album_detail', pk=album.pk)
+            data = {
+                'created': 'yes',
+                'album_title': album.title
+            }
+        else:
+            data = {
+                'errors': form.errors
+            }
+    else:
+        data = {'created': 'nothing, you dummy'}
     return JsonResponse(data)
 
 

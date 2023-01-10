@@ -20,6 +20,13 @@ const form = document.querySelector('#create-form');
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   console.log('submitted');
+  console.log(form);
+  const formData = new FormData(form);
+
+  for (let pair of formData.entries()) {
+    console.log(`${pair[0]}: ${pair[1]}`);
+  }
+
   fetch('album/new', {
     method: 'POST',
     credentials: 'same-origin',
@@ -28,9 +35,17 @@ form.addEventListener('submit', (event) => {
       'X-Requested-With': 'XMLHttpRequest',
       'X-CSRFToken': csrftoken,
     },
+    body: formData,
   })
     .then((response) => {
       return response.json();
     })
-    .then((data) => console.log(data));
+    .then((data) => {
+      console.log(data);
+      const albumList = document.querySelector('#album-list');
+      let newCard = document.createElement('div');
+      newCard.classList.add('card');
+      newEl.innerText = `${data.album_title}`;
+      albumList.appendChild(newEl);
+    });
 });

@@ -8,7 +8,7 @@
     Add an album {% include './icons/file-earmark-plus.svg' %}
   </a>
 </p>
-<div class="columns">
+<div id="album-list" class="columns">
   {% for album in albums.all %}
   <div class="card column m-3 is-half-tablet is-one-third-desktop">
     <div class="card-image"></div>
@@ -28,9 +28,9 @@
     <!-- whatever -->
     {% endfor %}
   </div>
+  {% endfor %}
 </div>
-{% endfor %}
-<form class="album-form box" id="create-form">
+<form class="box" id="create-form">
   <h3>Add a new album:</h3>
   {% csrf_token %} {{ form.as_p }}
   <button type="submit" class="button is-info is-hovered">Save</button>
