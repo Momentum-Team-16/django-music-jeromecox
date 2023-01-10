@@ -1,0 +1,22 @@
+{
+  "wrapperType": "collection",
+  "collectionType": "Album",
+  "artistId": 462715,
+  "collectionId": 273714443,
+  "amgArtistId": 302874,
+  "artistName": "System Of A Down",
+  "collectionName": "Toxicity",
+  "collectionCensoredName": "Toxicity",
+  "artistViewUrl": "https://music.apple.com/us/artist/system-of-a-down/462715?uo=4",
+  "collectionViewUrl": "https://music.apple.com/us/album/toxicity/273714443?uo=4",
+  "artworkUrl60": "https://is3-ssl.mzstatic.com/image/thumb/Music125/v4/82/51/52/825152b4-9423-b23b-c036-cc67ead732d4/888888046775.jpg/60x60bb.jpg",
+  "artworkUrl100": "https://is3-ssl.mzstatic.com/image/thumb/Music125/v4/82/51/52/825152b4-9423-b23b-c036-cc67ead732d4/888888046775.jpg/100x100bb.jpg",
+  "collectionPrice": 9.99,
+  "collectionExplicitness": "notExplicit",
+  "trackCount": 15,
+  "copyright": "℗ 2001 Sony Music Entertainment. With American Recordings, LLC.",
+  "country": "USA",
+  "currency": "USD",
+  "releaseDate": "2001-08-29T07:00:00Z",
+  "primaryGenreName": "Hard Rock"
+}
