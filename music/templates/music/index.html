@@ -57,6 +57,19 @@
   {% csrf_token %} {{ form.as_p }}
   <button type="submit" class="button is-info is-hovered">Save</button>
 </form>
+<h4 id="page-title">iTunes Album Search</h4>
+<!-- <div id="music-player"></div> -->
+<form id="music-search" novalidate>
+<div id="search-bar-field">
+  <input id="search-bar" type="text" placeholder="Search for Cool Albums"></input>
+</div>
+<div id="submit-field">
+  <button id="submit-button" class="button is-info" type="submit">Search</button></div>
+</form>
+<div id="results-header">
+  <h6>Search Results:</h6>
+</div>
+<div id="search-results" class="results"></div>
 {% endblock %}
 
 <!-- <button class="button is-danger is-outlined">

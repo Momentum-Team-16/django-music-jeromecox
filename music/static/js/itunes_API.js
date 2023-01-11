@@ -19,7 +19,7 @@ searchForm.addEventListener('submit', function (event) {
   // Handles form input submission
   else {
     searchResults.replaceChildren();
-    musicPlayer.replaceChildren();
+    // musicPlayer.replaceChildren();
     getItunesData(searchValue);
   }
 });
@@ -36,7 +36,7 @@ function createCardEl(type, classArray, parent) {
 function makeCard(album) {
   let card = createCardEl(
     'div',
-    ['card', 'col', 's12', 'm9', 'l4'],
+    ['card', 'column', 'm-3', 'is-half-tablet', 'is-one-third-desktop'],
     searchResults
   );
   // Add album artwork to card
