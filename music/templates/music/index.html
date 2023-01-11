@@ -17,9 +17,31 @@
       <a href="{% url 'album_edit' pk=album.pk %}" class="button is-dark"
         >{% include './icons/pencil-fill.svg' %}</a
       >
-      <a href="{% url 'album_delete' pk=album.pk %}" class="button is-danger"
-        >X</a
+      <button
+        class="button js-modal-trigger is-danger"
+        data-target="modal-delete"
       >
+        X
+      </button>
+      <div id="modal-delete" class="modal m-3">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">
+              Are you sure you want to delete this album?
+            </p>
+            <button class="delete" aria-label="close"></button>
+          </header>
+          <footer class="modal-card-foot">
+            <a
+              href="{% url 'album_delete' pk=album.pk %}"
+              class="button is-danger"
+              >Delete</a
+            >
+            <button class="button">Cancel</button>
+          </footer>
+        </div>
+      </div>
     </h2>
     <p>Track list:</p>
     {% for song in album.songs.all %}

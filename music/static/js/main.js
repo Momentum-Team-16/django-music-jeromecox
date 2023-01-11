@@ -17,6 +17,15 @@ function getCookie(name) {
 const csrftoken = getCookie('csrftoken');
 
 const form = document.querySelector('#create-form');
+const albumList = document.querySelector('#album-list');
+
+function createCardEl(type, classArray, parent) {
+  let newElement = document.createElement(type);
+  newElement.classList.add(...classArray);
+  parent.appendChild(newElement);
+  return newElement;
+}
+
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   console.log('submitted');
@@ -42,10 +51,21 @@ form.addEventListener('submit', (event) => {
     })
     .then((data) => {
       console.log(data);
-      const albumList = document.querySelector('#album-list');
-      let newCard = document.createElement('div');
-      newCard.classList.add('card');
-      newEl.innerText = `${data.album_title}`;
-      albumList.appendChild(newEl);
+      let newCard = createCardEl(
+        'div',
+        ['card', 'column', 'm-3', 'is-half-tablet', 'is-one-third-desktop'],
+        albumList
+      );
+      let cardImage = createCardEl('div', ['card-image'], newCard);
+      let cardDetails = createCardEl('h2', ['detail-div'], newCard);
+      let albumTitle = createCardEl('a', ['title-form'], cardDetails);
+      albumTitle.href = 'http://127.0.0.1:8000/album/pk';
+      albumTitle.innerText = `${data.album_title}`;
+      let albumEdit = createCardEl('a', ['button', 'is-dark'], cardDetails);
+      albumEdit.href = 'http://127.0.0.1:8000/album/pk/edit';
+      albumEdit.src = music / templates / music / icons / pencil - fill.svg;
+      let albumDelete = createCardEl('a', ['button', 'is-danger'], cardDetails);
+      albumDelete.href = 'http://127.0.0.1:8000/album/pk/delete';
+      albumDelete.innerText = 'X';
     });
 });

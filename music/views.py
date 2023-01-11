@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Album, Artist, Song
+from .models import User, Album, Artist, Song
 from .forms import AlbumForm
 from django.contrib import messages
 # from .consume import data_album
@@ -35,7 +35,7 @@ def create_album(request):
         form = AlbumForm(request.POST)
         if form.is_valid():
             album = form.save(commit=False)
-            album.owner = request.user
+            # album.owner = request.user
             album.save()
             messages.success(request, 'Album has been added to your collection')
             # return redirect('album_detail', pk=album.pk)
