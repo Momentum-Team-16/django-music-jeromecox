@@ -5,7 +5,11 @@
 <div id="album-list" class="columns">
   {% for album in albums.all %}
   <div class="card column m-3 is-half-tablet is-one-third-desktop">
-    <div class="card-image"></div>
+    <div class="card-image">
+      <figure class="is-100x100 mb-2">
+        <img src="{{ album.album_art }}" alt="Album Art">
+      </figure>
+    </div>
     <div class="detail-div">
       <a href="{% url 'album-detail' pk=album.pk %}">{{ album }}</a>
       <a href="{% url 'album-edit' pk=album.pk %}" class="button is-dark"
@@ -34,16 +38,15 @@
           </footer>
         </div>
       </div>
+      <div class="song-list is-flex-direction-column">
+        <p>Track list:</p>
+      {% for song in album.songs.all %}
+      <p>  
+      "{{ song.title }}"
+      </p>
+      {% endfor %}
+      </div>
     </div>
-    {% if song in album.songs %}
-    <p>Track list:</p>
-    {% for song in album.songs.all %}
-    <!-- whatever -->
-    "{{ song.title }}"
-    <!-- whatever -->
-    {% endfor %}
-    <!-- whatever -->
-    {% endif %}
   </div>
   {% endfor %}
 </div>
@@ -53,7 +56,7 @@
   <button type="submit" class="button is-info is-hovered mt-1">Save</button>
 </form>
 <form id="music-search" class="box" novalidate>
-  <h3 id="page-title">iTunes Album Search</h3>
+  <h3 id="page-title">iTunes Album Search:</h3>
 <div id="search-bar-field" class="mb-1">
   <input id="search-bar" class="container is-fullhd" type="text" placeholder="Search for Cool Albums"></input>
 </div>

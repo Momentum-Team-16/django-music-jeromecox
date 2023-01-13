@@ -30,6 +30,7 @@ urlpatterns = [
     # name argument(a nickname/shortcut used to refer to this path in other places in the project)
     path('album/<int:pk>', views.album_detail, name='album-detail'),
     path('album/new', views.create_album, name='album-new'),
+    path('album/new_itunes', views.create_itunes_album, name='album-new-itunes'),
     path('album/<int:pk>/edit', views.album_edit, name='album-edit'),
     path('album/<int:pk>/delete', views.album_delete, name='album-delete'),
     path('album/<int:pk>/delete_detail', views.album_delete_detail, name='album-delete-detail'),

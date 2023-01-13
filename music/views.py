@@ -26,10 +26,6 @@ def album_detail(request, pk):
     return render(request, 'music/album_detail.html', {'album': album})
 
 
-# def ajax_post_view(request):
-#     data_from_post = json.load(request)['post_data']
-
-
 def create_album(request):
     if request.method == 'POST':
         form = AlbumForm(request.POST)
@@ -38,7 +34,7 @@ def create_album(request):
             # album.owner = request.user
             album.save()
             messages.success(request, 'Album has been added to your collection')
-            # return redirect('album_detail', pk=album.pk)
+
             data = {
                 'created': 'yes',
                 'album_title': album.title,
@@ -50,7 +46,38 @@ def create_album(request):
                 'errors': form.errors
             }
     else:
-        data = {'created': 'nothing, you dummy'}
+        data = {'created': 'nothing, you silly goose'}
+    return JsonResponse(data)
+
+
+def create_itunes_album(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        artist_name = data['artist']
+        album_title = data['title']
+        album_art = data['albumArt']
+        album_release = data['releaseDate']
+        formatted_release = album_release[:10]
+        album_genre = data['albumGenre']
+
+        artist, created = Artist.objects.get_or_create(name=artist_name)
+
+        album_title = data['title']
+        album, created = Album.objects.get_or_create(
+            title=album_title,
+            release_date=formatted_release,
+            album_art=album_art
+        )
+
+        album.save()
+        data = {
+            'album_title': album.title,
+            'album_artist': artist.name,
+            'album_art': album.album_art,
+            'album_pk': album.pk,
+        }
+    else:
+        data = {'created': 'nothing'}
     return JsonResponse(data)
 
 
@@ -82,46 +109,3 @@ def album_delete_detail(request, pk):
     album.delete()
     messages.error(request, 'Album has been deleted from your collection')
     return redirect('home')
-
-
-# def make_artist_from_my_API():
-#     new_artist = Artist.objects.create(name=data_album.get('artistName'))
-
-
-# def make_album_from_my_API():
-#     new_album = Album.objects.create(
-#         title=data_album.get('collectionName'),
-#         release_date=data_album.get('releaseDate')
-#     )
-
-
-# def make_artist():
-#     with open('music/test.json') as file:
-#         data = json.load(file)
-
-#     '''TODO: if artist is already in database, merge new album'''
-
-#     data_artist = Artist.objects.create(
-#         name=data.get('artistName'))
-
-
-# def make_album():
-#     with open('music/test.json') as file:
-#         data = json.load(file)
-
-#     '''TODO: alert user if album is already in database'''
-
-#     data_album = Album.objects.create(
-#         title=data.get('collectionName'),
-#         release_date=data.get('releaseDate'))
-
-
-# def make_song():
-#     with open('music/test.json') as file:
-#         data = json.load(file)
-#         print(type(data), data)
-
-#     data_song = Song.objects.create(
-#         title=data.get('trackName'),
-#         album=data_album,
-#         artist=data_artist)

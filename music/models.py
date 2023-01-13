@@ -41,12 +41,12 @@ class Album(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     release_date = models.DateField(blank=True, null=True)
     genre = models.CharField(max_length=2, choices=GENRE_CHOICES, null=True, blank=True)
-    album_art = models.ImageField(blank=True, null=True)
+    album_art = models.URLField(blank=True, null=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=2)
 
     def __str__(self):
         artists = self.artist_from_songs
-        return f'{self.title}' + ' by ' + ','.join([artist.name for artist in artists])
+        return f'{self.title}' + ' by ' + ', '.join({artist.name for artist in artists})
 
     @property
     def artist_from_songs(self):
