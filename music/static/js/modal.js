@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+  let triggerTest = document.querySelectorAll('.js-modal-trigger');
+  console.log(triggerTest);
   // Functions to open and close a modal
   function openModal($el) {
     $el.classList.add('is-active');
@@ -16,10 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add a click event on buttons to open a specific modal
   (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+    console.log(`building modal: ${$trigger}`);
     const modal = $trigger.dataset.target;
     const $target = document.getElementById(modal);
 
     $trigger.addEventListener('click', () => {
+      console.log(`click ${$trigger}`);
       openModal($target);
     });
   });

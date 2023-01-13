@@ -41,8 +41,10 @@ def create_album(request):
             # return redirect('album_detail', pk=album.pk)
             data = {
                 'created': 'yes',
-                'album_title': album.title
+                'album_title': album.title,
+                'album_pk': album.pk
             }
+            form = AlbumForm()
         else:
             data = {
                 'errors': form.errors
@@ -59,7 +61,7 @@ def album_edit(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, 'Album has been updated')
-            return redirect('album_detail', pk=album.pk)
+            return redirect('album-detail', pk=album.pk)
     else:
         form = AlbumForm(instance=album)
     return render(request, 'music/edit_album.html', {'form': form})
@@ -69,7 +71,17 @@ def album_delete(request, pk):
     album = get_object_or_404(Album, pk=pk)
     album.delete()
     messages.error(request, 'Album has been deleted from your collection')
-    return redirect('../..')
+    data = {
+        'deleted': 'yes'
+    }
+    return JsonResponse(data)
+
+
+def album_delete_detail(request, pk):
+    album = get_object_or_404(Album, pk=pk)
+    album.delete()
+    messages.error(request, 'Album has been deleted from your collection')
+    return redirect('home')
 
 
 # def make_artist_from_my_API():

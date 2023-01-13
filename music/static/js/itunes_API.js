@@ -44,25 +44,22 @@ function makeCard(album) {
   pic.src = album.artworkUrl100;
 
   // Add album title to card
-  let albumEl = createCardEl('div', ['track-name'], card);
+  let albumEl = createCardEl('div', ['track-name', 'is-italic'], card);
   let albumTitle = album.collectionName;
-  albumEl.innerText = `"${albumTitle}"`;
+  albumEl.innerText = `${albumTitle}`;
 
   // Add artist name to card
   let name = createCardEl('div', ['artist-name'], card);
   let artName = album.artistName;
   name.innerText = artName;
 
-  // Create audio player for chosen (clicked) card
-  //   card.addEventListener("click", function (event) {
-  //     musicPlayer.replaceChildren();
-  //     let audioDiv = createCardEl("audio", ["audio"], musicPlayer);
-  //     audioDiv.src = song.previewUrl;
-  //     audioDiv.controls = true;
-  //     audioDiv.autoplay = true;
-  //     let nowPlay = createCardEl("h6", ["nowPlay"], musicPlayer);
-  //     nowPlay.innerText = `Now playing: "${song.trackName}" by ${song.artistName}`;
-  //   });
+  // Add to collection button
+  let addCollectButton = createCardEl('button', ['button', 'is-info'], card);
+  addCollectButton.setAttribute('type', 'submit');
+  addCollectButton.innerText = 'Add to Collection';
+
+  // Add album to collection from click on card
+  addCollectButton.addEventListener('click', function (event) {});
 }
 
 // Function fetch GET request from iTunes API

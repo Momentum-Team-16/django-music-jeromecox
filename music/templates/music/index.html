@@ -2,66 +2,60 @@
 <!-- hey Prettier, keep 1 and 3 separate -->
 {% block content %}
 <!-- This line ^ overwrites what's in this block on base.html -->
-<h2 class="has-text-centered">This is my homepage. This is index.html</h2>
-<p>
-  <a href="{% url 'album_new' %}" class="button is-info is-light">
-    Add an album {% include './icons/file-earmark-plus.svg' %}
-  </a>
-</p>
 <div id="album-list" class="columns">
   {% for album in albums.all %}
   <div class="card column m-3 is-half-tablet is-one-third-desktop">
     <div class="card-image"></div>
-    <h2>
-      <a href="{% url 'album_detail' pk=album.pk %}">{{ album }}</a>
-      <a href="{% url 'album_edit' pk=album.pk %}" class="button is-dark"
-        >{% include './icons/pencil-fill.svg' %}</a
+    <div class="detail-div">
+      <a href="{% url 'album-detail' pk=album.pk %}">{{ album }}</a>
+      <a href="{% url 'album-edit' pk=album.pk %}" class="button is-dark"
+        >✎</a
       >
       <button
         class="button js-modal-trigger is-danger"
-        data-target="modal-delete"
+        data-target="{{ album.pk }}"
       >
         X
       </button>
-      <div id="modal-delete" class="modal m-3">
+      <div id="{{ album.pk }}" class="modal m-3">
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
             <p class="modal-card-title">
-              Are you sure you want to delete this album?
+              Delete <span class="is-italic">{{ album.title }}</span> from your collection?
             </p>
             <button class="delete" aria-label="close"></button>
           </header>
           <footer class="modal-card-foot">
-            <a
-              href="{% url 'album_delete' pk=album.pk %}"
-              class="button is-danger"
-              >Delete</a
-            >
+            <button data-album-pk="{{ album.pk }}" class="button is-danger delete-button">
+              Delete
+            </button>
             <button class="button">Cancel</button>
           </footer>
         </div>
       </div>
-    </h2>
+    </div>
+    {% if song in album.songs %}
     <p>Track list:</p>
     {% for song in album.songs.all %}
     <!-- whatever -->
     "{{ song.title }}"
     <!-- whatever -->
     {% endfor %}
+    <!-- whatever -->
+    {% endif %}
   </div>
   {% endfor %}
 </div>
-<form class="box" id="create-form">
+<form id="create-form" class="box">
   <h3>Add a new album:</h3>
   {% csrf_token %} {{ form.as_p }}
-  <button type="submit" class="button is-info is-hovered">Save</button>
+  <button type="submit" class="button is-info is-hovered mt-1">Save</button>
 </form>
-<h4 id="page-title">iTunes Album Search</h4>
-<!-- <div id="music-player"></div> -->
-<form id="music-search" novalidate>
-<div id="search-bar-field">
-  <input id="search-bar" type="text" placeholder="Search for Cool Albums"></input>
+<form id="music-search" class="box" novalidate>
+  <h3 id="page-title">iTunes Album Search</h3>
+<div id="search-bar-field" class="mb-1">
+  <input id="search-bar" class="container is-fullhd" type="text" placeholder="Search for Cool Albums"></input>
 </div>
 <div id="submit-field">
   <button id="submit-button" class="button is-info" type="submit">Search</button></div>
@@ -71,10 +65,3 @@
 </div>
 <div id="search-results" class="results"></div>
 {% endblock %}
-
-<!-- <button class="button is-danger is-outlined">
-  <span>Delete</span>
-  <span class="icon is-small">
-    <i class="fas fa-times"></i>
-  </span>
-</button> -->
