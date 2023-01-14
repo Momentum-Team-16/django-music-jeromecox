@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 <!-- whatever -->
 {% block content %}
-<h2>New album</h2>
-<form method="POST" class="album-form">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit" class="save btn btn-secondary">Save</button>
-</form>
+<div class="card p-3">
+  <h2>Edit album</h2>
+  <form method="POST" class="album-form">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit" class="button is-info is-hovered mt-1">Save</button>
+  </form>
+</div>
 {% endblock %}

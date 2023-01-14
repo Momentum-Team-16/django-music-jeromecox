@@ -31,7 +31,6 @@ def create_album(request):
         form = AlbumForm(request.POST)
         if form.is_valid():
             album = form.save(commit=False)
-            # album.owner = request.user
             album.save()
             messages.success(request, 'Album has been added to your collection')
 

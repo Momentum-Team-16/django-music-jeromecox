@@ -2,50 +2,46 @@
 <!-- whatever -->
 {% block content %}
 <div class="card p-3">
-  <h2>
-    {{ album }}
-    <aside class="actions">
-      <a href="{% url 'album-edit' pk=album.pk %}" class="button is-dark">
-        ✎
-      </a>
-      <button
-        class="button js-modal-trigger is-danger"
-        data-target="modal-delete"
-      >
-        X
-      </button>
-      <div id="modal-delete" class="modal m-3">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">
-              Delete <span class="is-italic">{{ album.title }}</span> from your
-              collection?
-            </p>
-            <button class="delete" aria-label="close"></button>
-          </header>
-          <footer class="modal-card-foot">
-            <a
-              href="{% url 'album-delete-detail' pk=album.pk %}"
-              class="button is-danger"
-              >Delete</a
-            >
-            <button class="button">Cancel</button>
-          </footer>
-        </div>
+  <div class="card-image">
+    <figure class="is-100x100 mb-2">
+      <img src="{{ album.album_art }}" alt="Album Art" />
+    </figure>
+  </div>
+  <div class="detail-div">
+    <p class="card-title">{{ album }}</p>
+    <a href="{% url 'album-edit' pk=album.pk %}" class="button is-dark"> ✎ </a>
+    <button
+      class="button js-modal-trigger is-danger"
+      data-target="modal-delete"
+    >
+      X
+    </button>
+    <div id="modal-delete" class="modal m-3">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">
+            Delete <span class="is-italic">{{ album.title }}</span> from your
+            collection?
+          </p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <footer class="modal-card-foot">
+          <a
+            href="{% url 'album-delete-detail' pk=album.pk %}"
+            class="button is-danger"
+            >Delete</a
+          >
+          <button class="button">Cancel</button>
+        </footer>
       </div>
-    </aside>
-  </h2>
-  <p>Release date: {{ album.release_date }}</p>
-  <p>Genre: {{ album.get_genre_display }}</p>
-  {% if song in album.songs %}
-  <p>Track list</p>
-  {% for song in album.songs.all %}
-  <!-- whatever -->
-  <p>"{{ song.title }}"</p>
-  <!-- whatever -->
-  {% endfor %}
-  <!-- whatever -->
-  {% endif %}
+    </div>
+    <p>Release date: {{ album.release_date }}</p>
+    <p>Genre: {{ album.get_genre_display }}</p>
+    <p>Track list</p>
+    {% for song in album.songs.all %}
+    <p>"{{ song.title }}"</p>
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}
