@@ -8,6 +8,8 @@ django = "*"
 django-registration-redux = "*"
 pillow = "*"
 django-extensions = "*"
+psycopg2-binary = "*"
+django-environ = "*"
 
 [dev-packages]
 flake8 = "*"
